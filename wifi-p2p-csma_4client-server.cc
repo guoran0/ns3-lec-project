@@ -231,9 +231,9 @@ main (int argc, char *argv[])
 
   if (tracing == true)
     {
-      pointToPoint.EnablePcapAll ("third");
-      phy.EnablePcap ("third", apDevices.Get (0));
-      csma.EnablePcap ("third", csmaDevices.Get (0), true);
+      pointToPoint.EnablePcapAll ("wifi-csma");
+      phy.EnablePcap ("wifi-csma", apDevices.Get (0));
+      csma.EnablePcap ("wifi-csma", csmaDevices.Get (0), true);
     }
 
   Simulator::Run ();

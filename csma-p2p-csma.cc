@@ -212,7 +212,7 @@ main (int argc, char *argv[])
 
   //安装其他节点应用程序
   ApplicationContainer clientApps = 
-    echoClient.Install (csmaNodes2.Get (nCsma2));
+  echoClient.Install (csmaNodes2.Get (nCsma2));
   clientApps.Start (Seconds (2.0));
   clientApps.Stop (Seconds (10.0));
 
