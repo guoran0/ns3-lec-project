@@ -146,10 +146,14 @@ main (int argc, char *argv[])
                                  "GridWidth", UintegerValue (3),
                                  "LayoutType", StringValue ("RowFirst"));
 
-  //配置STA移动方式，RandomWalk2dMobilityModel，随机游走模型
-  mobility.SetMobilityModel ("ns3::RandomWalk2dMobilityModel",
-                             "Bounds", RectangleValue (Rectangle (-50, 50, -50, 50)));
+  //配置STA移动方式，线性离开
+  mobility.SetMobilityModel ("ns3::ConstantVelocityMobilityModel");
   mobility.Install (wifiStaNodes);
+for (uint n=0 ; n < wifiStaNodes.GetN() ; n++)
+        {
+        Ptr<ConstantVelocityMobilityModel> mob = wifiStaNodes.Get(n)->GetObject<ConstantVelocityMobilityModel>();
+        mob->SetVelocity(Vector(10, 0, 0));
+        }
 
 //配置AP移动方式，ConstantPositionMobilityModel，固定位置模型
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
