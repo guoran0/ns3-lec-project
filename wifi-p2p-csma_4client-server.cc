@@ -239,6 +239,22 @@ for (uint n=0 ; n < wifiStaNodes.GetN() ; n++)
       phy.EnablePcap ("wifi-csma", apDevices.Get (0));
       csma.EnablePcap ("wifi-csma", csmaDevices.Get (0), true);
     }
+   
+   AsciiTraceHelper ascii1;       //创建一个ASCII trace对象
+
+   pointToPoint.EnableAsciiAll (ascii1.CreateFileStream("p2p.tr")); //包含两个方法调用。
+//CreateFileStream()用未命名的对象在协议栈中创建了一个文件流，并把这个文件流传递给了调用方法，即创建了一个对象代表着一个名为“first.tr”的文件，并传递给了NS3。
+
+//EnableAsciiAll()告诉helper你想要将ASCII tracing安装在仿真中的点到点设备上，并且你想要接收端以ASCII格式写出数据包移动信息。
+   pointToPoint.EnablePcapAll ("p2p");
+
+   AsciiTraceHelper ascii2;       //创建一个ASCII trace对象
+
+   csma.EnableAsciiAll (ascii2.CreateFileStream("csma.tr")); //包含两个方法调用。
+//CreateFileStream()用未命名的对象在协议栈中创建了一个文件流，并把这个文件流传递给了调用方法，即创建了一个对象代表着一个名为“first.tr”的文件，并传递给了NS3。
+
+//EnableAsciiAll()告诉helper你想要将ASCII tracing安装在仿真中的点到点设备上，并且你想要接收端以ASCII格式写出数据包移动信息。
+    csma.EnablePcapAll ("csma");
 
   Simulator::Run ();
   Simulator::Destroy ();
